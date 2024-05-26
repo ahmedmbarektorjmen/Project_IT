@@ -24,19 +24,14 @@ CREATE TABLE products (
         created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 );
 
-CREATE TABLE carts (
-        id varchar(255) NOT NULL PRIMARY KEY,
-        user_id INTEGER NOT NULL,
-        created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(user_id) REFERENCES users (id) on update cascade on delete cascade
-);
 
 CREATE TABLE cart_items (
         id varchar(255) NOT NULL PRIMARY KEY,
-        cart_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
         product_id INTEGER NOT NULL,
         quantity INTEGER NOT NULL,
-        FOREIGN KEY(cart_id) REFERENCES carts (id) on update cascade on delete cascade,
+        created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(user_id) REFERENCES users (id) on update cascade on delete cascade
         FOREIGN KEY(product_id) REFERENCES products (id) on update cascade on delete cascade
 );
 
