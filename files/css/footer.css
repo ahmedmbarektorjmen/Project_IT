@@ -1,0 +1,132 @@
+footer {
+  display: flex;
+  color: #000;
+  flex-direction: column;
+}
+footer .top_footer {
+  background: #ff0;
+  padding: 5px;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer .footer_copyright {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  gap: 0.5rem;
+  font-size: min(4vw, 1rem);
+}
+
+@media only screen and (max-width: 800px) {
+  footer .top_footer {
+    height: 20rem;
+    gap: 2.7rem;
+  }
+  footer .top_footer .logo h1 {
+    font-weight: 800;
+  }
+  footer .top_footer p {
+    font-weight: 600;
+  }
+  footer .top_footer .links {
+    letter-spacing: 0.2rem;
+    font-weight: 800;
+  }
+  footer .top_footer div.social {
+    display: flex;
+    gap: 1.5rem;
+    font-size: min(10vw, 2rem);
+  }
+  footer .top_footer div.social li.facebook i {
+    color: #3700ff;
+  }
+  footer .top_footer div.social li.instagram i {
+    color: #800080;
+  }
+  footer .top_footer div.social li.github i {
+    color: #fff;
+  }
+  footer .top_footer div.social li.youtube i {
+    color: #f00;
+  }
+  footer .top_footer div.social li.twitter i {
+    color: #002fff;
+  }
+}
+@media only screen and (min-width: 801px) {
+  footer .top_footer {
+    background: #ffff00;
+    height: 350px;
+    gap: 3rem;
+  }
+  footer .top_footer .logo h1 {
+    font-weight: 800;
+  }
+  footer .top_footer p {
+    font-weight: 600;
+  }
+  footer .top_footer .links {
+    letter-spacing: 0.2rem;
+    font-weight: 800;
+  }
+  footer .top_footer div.social {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 2rem;
+  }
+  footer .top_footer div.social li.facebook {
+    transition: all 0.4s ease-out;
+  }
+  footer .top_footer div.social li.facebook:hover {
+    transition: all 0.4s ease-in;
+    font-size: 3rem;
+  }
+  footer .top_footer div.social li.facebook:hover i {
+    color: #3700ff;
+  }
+  footer .top_footer div.social li.instagram {
+    transition: all 0.4s ease-out;
+  }
+  footer .top_footer div.social li.instagram:hover {
+    transition: all 0.4s ease-in;
+    font-size: 3rem;
+  }
+  footer .top_footer div.social li.instagram:hover i {
+    color: #800080;
+  }
+  footer .top_footer div.social li.github {
+    transition: all 0.4s ease-out;
+  }
+  footer .top_footer div.social li.github:hover {
+    transition: all 0.4s ease-in;
+    font-size: 3rem;
+  }
+  footer .top_footer div.social li.github:hover i {
+    color: #fff;
+  }
+  footer .top_footer div.social li.youtube {
+    transition: all 0.4s ease-out;
+  }
+  footer .top_footer div.social li.youtube:hover {
+    transition: all 0.4s ease-in;
+    font-size: 3rem;
+  }
+  footer .top_footer div.social li.youtube:hover i {
+    color: #ff0000;
+  }
+  footer .top_footer div.social li.twitter {
+    transition: all 0.4s ease-out;
+  }
+  footer .top_footer div.social li.twitter:hover {
+    transition: all 0.5s ease-in;
+    font-size: 3rem;
+  }
+  footer .top_footer div.social li.twitter:hover i {
+    color: #002fff;
+  }
+}

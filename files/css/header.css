@@ -1,0 +1,141 @@
+header {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  position: fixed;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  -webkit-backdrop-filter: blur(0.6rem);
+          backdrop-filter: blur(0.6rem);
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  width: 100%;
+  height: 50px;
+  padding-left: 5px;
+}
+header .logo {
+  font-family: "Courgette", cursive;
+  font-size: 2rem;
+  font-weight: 900;
+}
+header .logo .shoppy {
+  background-color: #ff0;
+}
+header .align_input-button {
+  position: relative;
+}
+header .align_input-button .cart {
+  display: none;
+}
+header .align_input-button .search_icon {
+  display: none;
+}
+@keyframes magnificent_hover {
+  from {
+    top: -50px;
+    right: 100px;
+  }
+  to {
+    top: 0;
+    right: -50px;
+  }
+}
+@keyframes magnificent_infinite {
+  from {
+    top: -25px;
+    right: 100px;
+  }
+  to {
+    top: 0;
+    right: -50px;
+  }
+}
+header .align_input-button .login {
+  width: 100px;
+  height: 50px;
+  background-color: #ff0;
+  font-size: medium;
+  font-weight: 900;
+  border: 1px solid transparent;
+  border-radius: 0 0 10px 0px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+header .align_input-button .login::before {
+  transition: all 1s ease-in;
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: 100px;
+  width: 20px;
+  height: 100px;
+  background-color: #fff;
+  filter: blur(0.5rem);
+  transform: rotate(45deg);
+}
+header .align_input-button .login:hover::before {
+  animation: magnificent_hover 0.5s ease-out;
+}
+header .align_input-button .login::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100px;
+  filter: blur(0.5rem);
+  background-color: #fff;
+}
+header .align_input-button .login::after {
+  animation: magnificent_infinite 2s ease infinite;
+}
+header .align_input-button .login:hover {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid black;
+  background-color: rgba(255, 255, 0, 0.7803921569);
+  -webkit-backdrop-filter: blur(1rem);
+          backdrop-filter: blur(1rem);
+  transform: scale(0.92);
+  border-radius: 10px;
+}
+
+@media only screen and (min-width: 801px) {
+  header .align_input-button {
+    position: relative;
+  }
+  header .align_input-button .cart {
+    display: none;
+  }
+  header .align_input-button .search_input {
+    margin-right: 0.5rem;
+    border: none;
+    outline: none;
+    height: 2rem;
+    padding: 8px;
+    width: 250px;
+    border-radius: 10px;
+    background: #e0e0e0;
+  }
+  header .align_input-button .search_icon {
+    display: inline-block;
+  }
+  header .align_input-button .cart {
+    display: none;
+    display: inline-block;
+    height: 40px;
+    width: 60px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+  header .align_input-button .cart:hover {
+    transition: 0.5s ease-in-out;
+    background: #e4dbff;
+    cursor: pointer;
+  }
+  header .search_input {
+    display: inline-block;
+  }
+  header .humburger {
+    display: none;
+  }
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/files/icons/trolley.png" type="image/x-icon">
+  <link rel="stylesheet" href="/files/css/loading.min.css">
+  <link rel="stylesheet" href="/files/css/main.min.css">
+  <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/bottom_nav.min.css">
+  <link rel="stylesheet" href="/files/css/search_pc.min.css">
+  <link rel="stylesheet" href="/files/css/navigation.min.css">
+  <link rel="stylesheet" href="/files/css/footer.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"
+    integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"
+    integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+    integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Shoppy.tn: Shopping...</title>
+</head>
+
+
+<body>
+  <div class="loading_animation" data-loading="true">
+    <div class="loading_image"></div>
+    <span class="loading_text_animation"></span>
+  </div>
+  <script src="/files/js/loading.js"></script>
+  <header>
+    <input type="checkbox" id="nav_check" hidden>
+    <div class="align_label-span" style="display: flex; gap: 1rem;align-items: center;">
+      <label for="nav_check" class="humburger">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
+    </div>
+
+    <div class="align_input-button">
+      <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." />
+      <button id="search_icon" class="search_icon fa-solid fa-magnifying-glass"></button>
+
+      <button class="cart"><a href="/cart.html"><i class="fa-solid
+                fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0);"><span id="cart_number"
+              class="cart_number"></span></i></a></button>
+      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+    </div>
+
+  </header>
+
+
+  <div id="resultsDiv" class="resultsDiv" style="display: none;"></div>
+  <nav class='navigation'>
+    <label for="nav_check" class="arrow">
+      <i class="fa-solid fa-arrow-left"></i>
+    </label>
+    <ul>
+      <li><a href="#smartphones_section"><button>Smartphones</button></a></li>
+      <li><a href="#PCs_section"><button>PCs et ordinateur</button></a></li>
+      <li><a href="#stockage_section"><button>Stockage</button></a></li>
+      <li><a href="#TVs_section"><button>TV</button></a></li>
+      <li><a href="#prints_section"><button>Imprimantes et Photocopies</button></a></li>
+      <li><a href="#kit_section"><button>Ècouteurs et son</button></a></li>
+      <li><a href="#watches_list"><button>Smart Watch</button></a></li>
+    </ul>
+  </nav>
+
+  <div class="root">
+    <nav class='navigation_PC'>
+      <li><a href="#smartphones_section"><button title="smartphone section">Smartphones</button></a></li>
+      <li><a href="#PCs_section"><button title="pc section">PCs et ordinateur</button></a></li>
+      <li><a href="#stockage_section"><button title="stockage section">Stockage</button></a></li>
+      <li><a href="#TVs_section"><button title="tv section">TV</button></a></li>
+      <li><a href="#prints_section"><button title="imprimante section">Imprimantes et Photocopies</button></a></li>
+      <li><a href="#kit_section"><button title="kit et son section">Ècouteurs et son</button></a></li>
+      <li><a href="#watches_list"><button title="watches section">Smart Watch</button></a></li>
+    </nav>
+
+
+    <div class="slider_container">
+      <img src="/files/images/slider/banner-ramadan-1290-252px-desktop-gaming-4.webp" alt="slider 1">
+      <img src="/files/images/slider/banner-1290-252-px-samsung-50-pouces-smart-q60b-smart-4k-1.webp" alt="slider 2">
+      <img src="/files/images/slider/61DUO0NqyyL._SX3000_.jpg" alt="slider
+            3">
+      <img src="/files/images/slider/71tIrZqybrL._SX3000_.jpg" alt="slider
+            4">
+      <img src="/files/images/slider/61TD5JLGhIL._SX3000_.jpg" alt="slider
+            5">
+      <img src="/files/images/slider/61jovjd+f9L._SX3000_.jpg" alt="slider
+            6">
+      <img src="/files/images/slider/71qid7QFWJL._SX3000_.jpg" alt="slider
+            7">
+
+    </div>
+
+    <div class="slider_controls">
+      <div><button class="prev" id="prev"><i class="fa-solid fa-chevron-left"></i></button></div>
+      <div><button class="next" id="next"><i class="fa-solid fa-chevron-right"></i></button></div>
+    </div>
+
+
+    <div class="products">
+      <a href="">
+        <img src="/files/images/timber/timber-statique-nova9-smartphone-2.webp" alt="" id="Smartphones" />
+      </a>
+
+      <a href="">
+        <img src="/files/images/timber/timber-statique-action-lenovo.webp" alt="" />
+      </a>
+
+      <a href="">
+        <img src="/files/images/timber/c46bb4c709e549f440e9370865b9f22004062615_ThinkCentre Neo 30a.jpg" alt="" />
+      </a>
+
+
+    </div>
+
+    <table id="smartphones_list" class="products-small">
+      <tr>
+        <td>
+          <a href="/product/2690444601">
+            <img id="smartphones_section" src="/files/images/smartphones/BU-OP-NORD-2-8-GRAY-11.webp" alt="" />
+          </a>
+        </td>
+
+        <td>
+          <a href="/product/5468760155">
+            <img src="/files/images/smartphones/BU-HU-Y90-BLACK-11.webp" alt="" />
+          </a>
+        </td>
+
+        <td><img src="/files/images/smartphones/INFINIX-N11-PRO-GREEN-11.webp" alt="" /></td>
+        <td><img src="/files/images/smartphones/OUKITEL-WP20-BO-11.webp" alt="" /></td>
+        <td><img src="/files/images/smartphones/BU-SM-A04-32-WHITE-11.webp" alt="" /></td>
+        <td><img src="/files/images/smartphones/BENCO-V80-BLUE-11.webp" alt="" /></td>
+      </tr>
+    </table>
+
+    <div class="products">
+      <a href="">
+        <img id="PCs_section" src="/files/images/timber/e72d9259dd1ae83bc3af3028004f1d321be2992d_lenovo-ideapad-3.jpg"
+          alt="" />
+      </a>
+      <a href="">
+        <img src="/files/images/timber/272642f422fad80b83b630e385d1d83dfe79c38b_Sans-titre-1.jpg" alt="" />
+      </a>
+    </div>
+
+    <table id="PCs_list" class="products-small">
+      <tr>
+        <td><img src="/files/images/PCs/M1502IA-BQ315W.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/82K2021YFG-bonne.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/82K2021YFG-d.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/82K2021XFG-c.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/6U948EA-b.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/6U8X7EA-a.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/GF63THIN11SC-613XFR-a.webp" alt="" /></td>
+        <td><img src="/files/images/PCs/5520G15I7-2.webp" alt="" /></td>
+      </tr>
+    </table>
+
+    <div class="products">
+      <a href="">
+        <img id="stockage_section" src="/files/images/stockage/timbre-disque-dur-interne-msi-spatium-s270-1.webp"
+          alt="" />
+      </a>
+    </div>
+
+    <table id="stockage_list" class="products-small">
+      <tr>
+        <td><img src="/files/images/stockage/SSD7CS900-240-PB-g.webp" alt="" /></td>
+        <td><img src="/files/images/timber/ec0157929f1396c1bae074d8f56e18e345815686_ACER-RE100.jpg" width="350px"
+            height="380px" alt="" /></td>
+      </tr>
+    </table>
+
+    <div class="products">
+
+      <a href="">
+        <img id="TVs_section" src="/files/images/timber/28d4843856f849bdbc31f10183002e3e1a1a7b64_tv vega square.jpg"
+          alt="" />
+      </a>
+    </div>
+
+    <table id="TVs_list" class="products-small">
+      <tr>
+        <td><img src="/files/images/TVs/A32F1HB1-2-bb.webp" alt="" /></td>
+        <td><img src="/files/images/TVs/TV-TCL-32D3200-1.webp" alt="" /></td>
+        <td><img src="/files/images/TVs/TV-ORIENT-50OT-G7J11-1.webp" alt="" /></td>
+        <td><img src="/files/images/TVs/TV-SAM-UA50AU7000U-3.webp" alt="" /></td>
+        <td><img src="/files/images/TVs/TV-TLF-65-G3A-a.webp" alt="" /></td>
+      </tr>
+    </table>
+
+    <div class="products">
+
+      <a href="">
+        <img id="prints_section" src="/files/images/timber/e7bffd62594bd8d679d333bc788605df6b9c97a0_epson-l3210.jpg"
+          alt="" />
+      </a>
+
+    </div>
+
+    <table id="prints_list" class="products-small">
+      <tr>
+        <td><img src="/files/images/prints/TS3440.webp" width="225px" height="300px" alt="" /></td>
+        <td><img src="/files/images/prints/LBP6030-A.webp" width="225px" height="300px" alt="" /></td>
+        <td><img src="/files/images/prints/BU-Z4B04A-1.webp" alt="" /></td>
+        <td><img src="/files/images/prints/BU-Z4B53A-30.webp" alt="" /></td>
+        <td><img src="/files/images/prints/BU-G-2420-1.webp" alt="" /></td>
+        <td><img src="/files/images/prints/BU-3YW70A-1.webp" alt="" /></td>
+        <td><img src="/files/images/prints/BU-C11CJ68403-29.webp" alt="" /></td>
+        <td><img src="/files/images/prints/BU-C11CJ67409-29.webp" alt="" /></td>
+      </tr>
+    </table>
+
+
+    <div class="products">
+
+      <a href="">
+        <img src="/files/images/timber/bf6bd86f5920ae3edc8ab3001e457a4c761893c4_ORIENT.jpg" alt="" />
+      </a>
+
+      <a href="">
+        <img src="/files/images/timber/58b3d5fbff21523f366cbd0a7f9608876805e0d0_hyperx.jpg" alt="" />
+      </a>
+
+    </div>
+
+    <table class="products-small" id="kit_section">
+      <tr>
+        <td><img src="/files/images/kit/BHR6606GL-2.webp" alt="" /></td>
+        <td><img src="/files/images/kit/F70T-WHITE.webp" alt="" /></td>
+        <td><img src="/files/images/kit/HU-T0010-BLUE-1.webp" alt="" /></td>
+        <td><img src="/files/images/kit/T0004-RED.webp" alt="" /></td>
+        <td><img src="/files/images/kit/SM-R180-WHITE.webp" alt="" /></td>
+        <td><img src="/files/images/kit/SM-R190NZVAMEA.webp" alt="" /></td>
+        <td><img src="/files/images/kit/TAT3255BK-00.webp" alt="" width="225px" height="300" /></td>
+      </tr>
+    </table>
+
+    <table id="watches_list" class="products-small">
+      <tr>
+        <td><img src="/files/images/watches/TEKO-T81-BLACK.webp" alt="" /></td>
+        <td><img src="/files/images/watches/ARTEK-PXS-PINK.webp" alt="" /></td>
+        <td><img src="/files/images/watches/BLULORY-ULTRA-P-B.webp" alt="" /></td>
+        <td><img src="/files/images/watches/HAYLOU-GST-BK.webp" alt="" /></td>
+        <td><img src="/files/images/watches/RUNE-B29-BLACK-2.webp" alt="" /></td>
+        <td><img src="/files/images/watches/SM-R865UZKAXAA-3.webp" alt="" /></td>
+      </tr>
+    </table>
+
+
+
+
+    <footer>
+      <div class='top_footer'>
+
+        <div class="logo">
+          <h1>Shoppy <span style="background-color: #fff;color:#000;">.tn</span></h1>
+        </div>
+
+        <p>its all about your dreams.</p>
+
+        <div class="links">
+          <li><a href="/about_us.html">ABOUT US</a></li>
+          <li><a href="/contact_us.html">CONTACT US</a></li>
+        </div>
+
+        <div class="social">
+          <li class="facebook"><a href="https://www.facebook.com/ahmd.torchi/" target="_blank"
+              rel="noopener noreferrer"><i class="fa-brands fa-facebook
+                      fa-beat"></i></a></li>
+          <li class="instagram"><a href="https://www.instagram.com/ahmd.torchi/" target="_blank"
+              rel="noopener noreferrer"><i class="fa-brands
+                      fa-square-instagram fa-beat"></i></a></li>
+          <li class="github"><a href="https://github.com/ahmedmbarektorjmen" target="_blank"
+              rel="noopener noreferrer"><i class="fa-brands fa-github
+                      fa-beat"></i></a></li>
+          <li class="youtube"><a href="https://www.youtube.com/channel/UCfQeKm3NW9dOB8uheWu1h4g" target="_blank"
+              rel="noopener noreferrer"><i class="fa-brands fa-youtube
+                      fa-beat"></i></a></li>
+          <li class="twitter"><a href="https://twitter.com/Torcki__ff" target="_blank" rel="noopener noreferrer"><i
+                class="fa-brands fa-twitter
+                      fa-beat"></i></a></li>
+        </div>
+      </div>
+
+      <div class="footer_copyright">
+        <span>&#169; 2024 all rights reserved to ahmed mbarek</span>
+        <i class="fa-solid fa-heart"></i>
+      </div>
+
+  </div>
+  </div>
+  </footer>
+
+  </div>
+  </div>
+
+
+
+  <nav class="bottom_navigation">
+    <a class="home" href="/">
+      <button class="fa-solid fa-house fa-xl " style="color: #000;"></button>
+    </a>
+
+    <a class="search_btn" href="/search.html">
+      <button class="fa-solid fa-magnifying-glass fa-xl" style="color: #616161;"></button>
+    </a>
+    <a class="cart" href="/cart.html">
+      <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161;">
+        <span id="cart_number" class="cart_number"></span>
+      </button>
+    </a>
+
+    <a class="account" href="/account.html">
+      <button class="fa-solid fa-user fa-xl" style="color: #616161;"></button>
+    </a>
+  </nav>
+  <script src="/files/js/navbar.js"></script>
+  <script src="/files/js/slider.js"></script>
+  <script src="/files/js/search_pc.js "></script>
+  <script src="/files/js/cart_span.js"></script>
+
+</body>
+
+</html>

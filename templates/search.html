@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/files/css/loading.min.css">
+  <script>
+    window.onload = function () {
+      searchInput.click();
+      searchInput.focus();
+    };
+    // Redirect to the mobile version of the page if the screen width is below the threshold
+    function redirect() {
+      if (window.innerWidth > 800) {
+        document.innerhtml = "";
+        window.location.href = "/";
+      }
+    }
+
+    // Call the function when the page is loaded and when the window is resized
+    window.onload = redirect;
+    window.onresize = redirect;
+  </script>
+  <link rel="shortcut icon" href="/files/icons/trolley.png" type="image/x-icon" />
+  <link rel="stylesheet" href="/files/css/search_mobile.min.css" />
+  <link rel="stylesheet" href="/files/css/main.min.css" />
+  <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/bottom_nav.min.css">
+  <link rel="stylesheet" href="/files/css/navigation.min.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"
+    integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"
+    integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+    integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Shoppy.tn: search</title>
+</head>
+
+<body>
+  <script src="/files/js/loading.js"></script>
+  <header>
+    <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." autofocus />
+    <button id="search_icon" class="search_icon fa-solid fa-magnifying-glass"></button>
+    <button id="searchdelete_icon" class="searchdelete_icon fa-sharp fa-solid fa-circle-xmark hide"
+      type="reset"></button>
+  </header>
+
+  <div class="root">
+    <div class="search_content" id="resultsDiv"></div>
+  </div>
+
+  <nav class="bottom_navigation">
+    <a class="home" href="/">
+      <button class="fa-solid fa-house fa-xl" style="color: #616161"></button>
+    </a>
+
+    <a class="search_btn" href="/search.html">
+      <button class="fa-solid fa-magnifying-glass fa-xl" style="color: #000"></button>
+    </a>
+    <a class="cart" href="/cart.html">
+      <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161">
+        <span id="cart_number" class="cart_number"></span>
+      </button>
+    </a>
+
+    <a class="account" href="/account.html">
+      <button class="fa-solid fa-user fa-xl" style="color: #616161"></button>
+    </a>
+  </nav>
+
+
+  <script src="/files/js/search.js"></script>
+  <script src="/files/js/cart_span.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/files/css/loading.min.css">
+  <link rel="shortcut icon" href="/files/icons/trolley.png" type="image/x-icon" />
+  <link rel="stylesheet" href="/files/css/main.min.css" />
+  <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/bottom_nav.min.css">
+  <link rel="stylesheet" href="/files/css/product.min.css" />
+  <link rel="stylesheet" href="/files/css/search_pc.min.css">
+  <link rel="stylesheet" href="/files/css/navigation.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"
+    integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"
+    integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+    integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>{{ product.name }}</title>
+</head>
+
+<body>
+  <div class="loading_animation" data-loading="true">
+    <div class="loading_image"></div>
+    <span class="loading_text_animation"></span>
+  </div>
+  <script src="/files/js/loading.js"></script>
+
+  <header>
+    <input type="checkbox" id="nav_check" hidden />
+    <div class="align_label-span" style="display: flex; gap: 1rem">
+      <label for="nav_check" class="humburger">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
+    </div>
+
+    <div class="align_input-button">
+      <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." />
+      <button id="search_icon" class="search_icon fa-solid fa-magnifying-glass"></button>
+      <button class="cart">
+        <a href="/cart.html"><i class="fa-solid fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0)"><span
+              id="cart_number" class="cart_number">0</span></i></a>
+      </button>
+      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+    </div>
+  </header>
+
+  <div id="resultsDiv" class="resultsDiv" style="display: none;"></div>
+
+  <nav class="navigation">
+    <label for="nav_check" class="arrow">
+      <i class="fa-solid fa-arrow-left"></i>
+    </label>
+    <li>
+      <a href="/"><button>Smartphones</button></a>
+    </li>
+    <li>
+      <a href="/"><button>PCs et ordinateur</button></a>
+    </li>
+    <li>
+      <a href="/"><button>Stockage</button></a>
+    </li>
+    <li>
+      <a href="/"><button>TV</button></a>
+    </li>
+    <li>
+      <a href="/"><button>Imprimantes et Photocopies</button></a>
+    </li>
+    <li>
+      <a href="/"><button>Ècouteurs et son</button></a>
+    </li>
+    <li>
+      <a href="/"><button>Smart Watch</button></a>
+    </li>
+  </nav>
+
+  <div class="root">
+    <div class="product_image">
+      <img id="image" src="{{ product.image }}" alt="{{ product.name }} image" />
+    </div>
+
+    <div class="product_content">
+      <div class="product_values">
+        <h1 id="item-name">{{ product.name }}</h1>
+
+        <p>Price: <span id="item-price">{{ product.price }}</span></p>
+      </div>
+
+      <div class="product_description">
+        <p id="description">{{ product.description }}</p>
+        <form>
+          <div class="cart">
+            <input id="input_cart" type="number" min="1" max="{{product.stock}}" value="1" />
+            <button id="add-to-cart" onclick="addToCart({{ product.id }})">
+              add to cart
+            </button>
+          </div>
+        </form>
+        <b>{{product.stock}} in stock</b>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom_navigation">
+    <a class="home" href="/">
+      <button class="fa-solid fa-house fa-xl" style="color: #616161"></button>
+    </a>
+
+    <a class="search_btn" href="/search.html">
+      <button class="fa-solid fa-magnifying-glass fa-xl" style="color: #616161"></button>
+    </a>
+    <a class="cart" href="/cart.html">
+      <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161">
+        <span id="cart_number" class="cart_number"></span>
+      </button>
+    </a>
+
+    <a class="account" href="/account.html">
+      <button class="fa-solid fa-user fa-xl" style="color: #616161"></button>
+    </a>
+  </nav>
+
+  <script src="/files/js/navbar.js"></script>
+  <script src="/files/js/product_cart.js"></script>
+  <script src="/files/js/cart_span.js"></script>
+  <script src="/files/js/search_pc.js "></script>
+</body>
+
+</html>
