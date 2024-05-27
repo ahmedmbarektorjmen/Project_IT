@@ -18,15 +18,20 @@
         <script src="/files/js/loading.js"></script>
         <div class="signup_card">
             <form action="" method="get">
-                <div class="signup_img"></div>
-                <div class="name_div"><input type="text" name="name" id="name" placeholder="name" required></div>
-                <div class="email_div"><input type="email" name="email" id="email" placeholder="email" required></div>
+                <h1>Sign up</h1>
+                <div class="name_div"><input type="text" name="username" id="username" placeholder="username"></div>
+                <div class="email_div"><input type="email" name="email" id="email" placeholder="email"></div>
                 <div class="password_div"><input type="password" name="password" id="password" class="password"
-                        placeholder="password" required></div>
+                        placeholder="password"></div>
                 <div class="password_div"><input type="password" name="repassword" id="repassword" class="password"
-                        placeholder="password again.." required></div>
-                <div class="signup_message" id="signup_message" style="display: none;">sorry there is no signup !</div>
-                <button type="submit" class="signup_btn" id="signup_btn">signup</button>
+                        placeholder="password again.."></div>
+                <img id="captcha-image" width="150" height="75" alt="CAPTCHA">
+                <button type="button" onclick="setCaptchaToken()">Refresh CAPTCHA</button>
+                <div class="password_div"><input type="text" id="captcha" placeholder="enter captcha..." name="captcha"
+                        required></div>
+                <input type="hidden" id="captcha_token" name="captcha_token">
+                <button type="submit" class="signup_btn" id="signup_btn">Signup</button>
+                <div class="signup_message" id="signup_message" style="display: none;"></div>
             </form>
             <div class="login_text">you have an account? <a href="/login.html">login</a></div>
         </div>

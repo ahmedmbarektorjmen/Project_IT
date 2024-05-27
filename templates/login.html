@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/files/css/loading.min.css">
     <link rel="stylesheet" href="/files/css/login.min.css">
-    
+
     <title>Login to shoppy</title>
 </head>
 
@@ -15,20 +15,26 @@
         <div class="loading_animation" data-loading="true">
             <div class="loading_image"></div>
             <span class="loading_text_animation"></span>
-          </div>
-          <script src="/files/js/loading.js"></script>
+        </div>
+        <script src="/files/js/loading.js"></script>
         <div class="login_card">
             <form action="" method="get">
-                <div class="login_img"></div>
-                <div class="email_div"><input type="email" name="email" id="email" placeholder="email" required></div>
-                <div class="password_div"><input type="password" name="password" id="password" class="password" placeholder="password" required></div>
-                <div class="login_message" id="login_message" style="display: none;">sorry there is no login !</div>
+                <h1>Login</h1>
+                <div class="email_div"><input type="text" name="username" id="username" placeholder="email or email..">
+                </div>
+                <div class="password_div"><input type="password" name="password" id="password" class="password"
+                        placeholder="password.."></div>
+                <img id="captcha-image" width="150" height="75" alt="CAPTCHA">
+                <button type="button" onclick="setCaptchaToken()">Refresh CAPTCHA</button>
+                <div class="password_div"><input type="text" id="captcha" placeholder="enter captcha..." name="captcha" required></div>
+                <input type="hidden" id="captcha_token" name="captcha_token">
                 <button type="submit" class="login_btn" id="login_btn">Login</button>
+                <div class="login_message" id="login_message" style="display: none;"></div>
             </form>
             <div class="signup_text">you don't have an account? <a href="/signup.html">signup</a></div>
         </div>
     </div>
-<script src="/files/js/login.js"></script>
+    <script src="/files/js/login.js"></script>
 </body>
 
 </html>

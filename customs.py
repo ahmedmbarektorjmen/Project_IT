@@ -1,12 +1,13 @@
 from fastapi import Security,HTTPException,status
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
-from fastapi.requests import Request
 from jose import jwt, ExpiredSignatureError, JWTError
 from pydantic import BaseModel
 import random
-from datetime import timedelta,datetime
 import string
+from datetime import timedelta,datetime
+from captcha.image import ImageCaptcha
+import io
 
 async def generate_id(n):
     return str(random.randint(10**n, 10**(n+1)-1))
@@ -67,3 +68,12 @@ class AuthHandler:
     # get current user with extracting the token from the authorization header in the request
     async def get_current_user(self,token:str= Security(oauth_scheme)):
         return self.decode_token(token)
+
+
+def generate_captcha_text(length=8):
+    return ''.join(random.choices(string.ascii_uppercase+string.digits, k=length))
+
+def create_captcha_image(text):
+    image = ImageCaptcha(width=300, height=100, fonts=None, font_sizes=(42,))
+    data = image.generate(text)
+    return io.BytesIO(data.read())

@@ -4,7 +4,7 @@ CREATE TABLE users (
     id varchar(255) NOT NULL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-	profile_pic Varchar(255) NOT NULL UNIQUE,
+	profile_pic Varchar(255) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     type VARCHAR(5) NOT NULL DEFAULT 'user',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -8,7 +8,7 @@ class User(Base):
     id = Column(String(255), primary_key=True)
     username = Column(String(50), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
-    profile_pic = Column(String(255),nullable=False,unique=True)
+    profile_pic = Column(String(255),nullable=False)
     password_hash = Column(String(255), nullable=False)
     type = Column(String(5),server_default="user", nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), nullable=False)

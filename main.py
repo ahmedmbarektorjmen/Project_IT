@@ -1,16 +1,14 @@
 # fastapi :
 from fastapi import FastAPI, Depends, status
-from fastapi.params import Query, Form, File, Security,Cookie
+from fastapi.params import Form, File, Security,Cookie,Body
 from fastapi.datastructures import UploadFile
 from fastapi.requests import Request
 from fastapi.exceptions import HTTPException
-from fastapi.responses import HTMLResponse,RedirectResponse,JSONResponse
+from fastapi.responses import HTMLResponse,RedirectResponse,StreamingResponse
 # security :
 from fastapi.middleware.cors import CORSMiddleware
 # authentication :
-from authlib import oauth2
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi.security import OAuth2PasswordBearer
 from customs import AuthHandler
 from customs import Token,TokenData
 # rendering adn static files:
@@ -19,6 +17,10 @@ from fastapi.templating import Jinja2Templates
 # file management :
 import shutil
 from customs import generate_file_name
+# session:
+from itsdangerous import URLSafeTimedSerializer
+#captcha:
+from customs import generate_captcha_text,create_captcha_image
 # db:
 from sqlalchemy.orm import Session
 import models, schemas, crud
@@ -27,8 +29,9 @@ from database import session, engine
 from icecream import ic
 # supplements:
 from typing import List
+from pydantic import EmailStr
 
-
+captcha_text = ""
 AUTHSECRET = "480ZD6D4k06IJ4h56zeD8f4e8fzef8rg45g45rg45erqgGF4E5f45seEG54ze89"
 
 models.Base.metadata.create_all(bind=engine)
@@ -43,6 +46,9 @@ def get_db():
 
 
 app = FastAPI()
+# session middleware
+serializer = URLSafeTimedSerializer("SECRET_KEY")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -82,34 +88,53 @@ async def authenticate_user(username:str,password:str, db:Session = Depends(get_
     password_verified = await auth_handler.verify_password(password,user["password_hash"])
     if (user is None) or (not password_verified):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED,"Invalid username and/or password")
-    return {"id":user["id"],"username":user["username"]}
+    access_token = await auth_handler.encode_token(user["id"],user["username"])
+    user.pop("password_hash")
+    user["access_token"] = access_token
+    user["token_type"] = "bearer"
+    return user
 
 
 
 # Route to create a user
 @app.post("/api/register", response_model=schemas.User,status_code=status.HTTP_200_OK)
-async def signup(auth_details: schemas.UserCreate, db: Session = Depends(get_db)):
-    user = await crud.get_user_by_username(db, auth_details.username)
+async def signup(captcha_token: str = Body(...),username:str=Body(...), password:str=Body(...),email:EmailStr=Body(...), captcha: str = Body(...), db: Session = Depends(get_db)):
+    try:
+        captcha_text = serializer.loads(captcha_token, max_age=300)
+        ic(captcha_text)
+    except:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid or expired CAPTCHA token !!")
+    if captcha != captcha_text:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid CAPTCHA !!")
+    auth_details = schemas.UserCreate(username=username,email=email,password=password)
+    user = await crud.get_user_by_username(db, username)
     if user is not None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Username already registered")
-    password_hash = await auth_handler.get_password_hash(auth_details.password)
-    plain_password = auth_details.password
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Username already registered !!")
+    password_hash = await auth_handler.get_password_hash(password)
     auth_details.password = password_hash
     user_created = await crud.create_user(db, auth_details)
-    await authenticate_user(auth_details.username,plain_password,db)
-    access_token = await auth_handler.encode_token(user_created["id"],auth_details.username)
+    await authenticate_user(username,password,db)
+    access_token = await auth_handler.encode_token(user_created["id"],username)
     return {"access_token":access_token,"token_type":"bearer"}
 # Route to login :
-@app.post("/api/login", response_model=schemas.User,status_code=status.HTTP_200_OK)
-async def login(auth_details: schemas.UserLogin, db: Session = Depends(get_db)):
-    return await authenticate_user(auth_details.username,auth_details.password,db)
-@app.delete("/api/update_user",status_code=status.HTTP_200_OK)
+@app.post("/api/login",status_code=status.HTTP_200_OK)
+async def login(captcha_token: str = Body(...),username:str=Body(...), password:str=Body(...), captcha: str = Body(...),db: Session = Depends(get_db)):
+    try:
+        captcha_text = serializer.loads(captcha_token, max_age=300)
+        ic(captcha_text)
+    except:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid or expired CAPTCHA token !!")
+    if captcha != captcha_text:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid CAPTCHA !!")
+    return await authenticate_user(username,password,db)
+
+@app.delete("/api/delete_user",status_code=status.HTTP_200_OK)
 async def delete_user (db: Session = Depends(get_db),access_token:str= Security(auth_handler.oauth_scheme)):
     user = await auth_handler.decode_token(access_token)
     msg = await crud.delete_user(user,db)
     if msg != "deleted":
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="User not deleted")
-    return {"msg":"User deleted successfully"}
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="User not deleted !!")
+    return {"detail":"User deleted successfully !!"}
 
 
 
@@ -127,6 +152,17 @@ async def change_profile_pic(request: Request,profile_pic: UploadFile = File(...
     with open(image_url, "wb") as buffer:
         shutil.copyfileobj(profile_pic.file, buffer)
     return {"msg":"Profile pic changed successfully"}
+
+
+
+@app.get("/captcha")
+async def get_captcha():
+    captcha_text = generate_captcha_text()
+    captcha_token = serializer.dumps(captcha_text)
+    ic(captcha_text)
+    buf = create_captcha_image(captcha_text)
+    return StreamingResponse(buf, media_type="image/png", headers={"X-Captcha-Token": captcha_token})
+
 
 
 
