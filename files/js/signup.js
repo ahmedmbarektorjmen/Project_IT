@@ -11,6 +11,16 @@ async function setCaptchaToken() {
 }
 setCaptchaToken();
 
+function validateUsername(username) {
+  const usernameRegex = /^[a-zA-Z0-9_.-]{3,30}$/;
+  return usernameRegex.test(username);
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
 const show_message = (text) => {
   message.style.display = "";
   message.innerText = text;
@@ -43,6 +53,18 @@ signup_btn.addEventListener("click", async (e) => {
   const captcha = document.getElementById("captcha");
   const captcha_token = document.getElementById("captcha_token");
 
+  if (
+    username.value.trim() == "" ||
+    password.value.trim() == "" ||
+    repassword.value.trim() == "" ||
+    email.value.trim() == "" ||
+    captcha.value.trim() == ""
+  ) {
+    stop_loading();
+    show_message("Invalid inputs !");
+    return;
+  }
+
   if (repassword.value != password.value) {
     stop_loading();
     show_message("Passwords doesn't match !");
@@ -55,20 +77,16 @@ signup_btn.addEventListener("click", async (e) => {
   }
   if (password.value.length >= 30) {
     stop_loading();
-    show_message("must be less than 30 characters !");
+    show_message("Password must be less than 30 characters !");
     return;
   }
-  if (
-    username.value.trim() == "" ||
-    password.value.trim() == "" ||
-    repassword.value.trim() == "" ||
-    email.value.trim() == "" ||
-    captcha.value.trim() == ""
-  ) {
+  if (!validateUsername(username.value) || !validateEmail(email.value)) {
     stop_loading();
-    show_message("Invalid inputs !");
+    show_message("email/username must not contain extra characters !");
     return;
   }
+
+
   hide_message();
   const res = await fetch("/api/register", {
     method: "POST",

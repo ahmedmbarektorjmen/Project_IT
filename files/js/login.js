@@ -11,6 +11,16 @@ async function setCaptchaToken() {
 }
 setCaptchaToken();
 
+function validateUsername(username) {
+  const usernameRegex = /^[a-zA-Z0-9_.-]{3,30}$/;
+  return usernameRegex.test(username);
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
 const show_message = (text) => {
   message.style.display = "";
   message.innerText = text;
@@ -38,16 +48,6 @@ login_btn.addEventListener("click", async (e) => {
   const captcha = document.getElementById("captcha");
   const captcha_token = document.getElementById("captcha_token");
 
-  if (password.value.length < 8) {
-    stop_loading();
-    show_message("Password must be at least 8 characters !");
-    return;
-  }
-  if (password.value.length >= 30) {
-    stop_loading();
-    show_message("must be less than 30 characters !");
-    return;
-  }
   if (
     username.value.trim() == "" ||
     password.value.trim() == "" ||
@@ -57,6 +57,31 @@ login_btn.addEventListener("click", async (e) => {
     show_message("Invalid Inputs !");
     return;
   }
+
+  if (password.value.length < 8) {
+    stop_loading();
+    show_message("Password must be at least 8 characters !");
+    return;
+  }
+  if (password.value.length >= 30) {
+    stop_loading();
+    show_message("Password must be less than 30 characters !");
+    return;
+  }
+  if (
+    username.value.includes("@") &&
+    username.value.includes(".") &&
+    !validateEmail(username.value)
+  ) {
+    stop_loading();
+    show_message("email must not contain extra characters !");
+    return;
+  } else if (!validateUsername(username.value)) {
+    stop_loading();
+    show_message("username must not contain extra characters !");
+    return;
+  }
+
   const res = await fetch("/api/login", {
     method: "POST",
     headers: {

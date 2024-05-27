@@ -11,13 +11,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from customs import AuthHandler
 from customs import Token,TokenData
-# rendering adn static files:
+# user validation:
+from customs import validate_email,validate_username
+# rendering and static files:
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 # file management :
 import shutil
 from customs import generate_file_name
-# session:
+# urlsafe tokens:
 from itsdangerous import URLSafeTimedSerializer
 #captcha:
 from customs import generate_captcha_text,create_captcha_image
@@ -95,9 +97,8 @@ async def authenticate_user(username:str,password:str, db:Session = Depends(get_
     return user
 
 
-
 # Route to create a user
-@app.post("/api/register", response_model=schemas.User,status_code=status.HTTP_200_OK)
+@app.post("/api/register",response_model=Token,status_code=status.HTTP_200_OK)
 async def signup(captcha_token: str = Body(...),username:str=Body(...), password:str=Body(...),email:EmailStr=Body(...), captcha: str = Body(...), db: Session = Depends(get_db)):
     try:
         captcha_text = serializer.loads(captcha_token, max_age=300)
@@ -106,9 +107,18 @@ async def signup(captcha_token: str = Body(...),username:str=Body(...), password
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid or expired CAPTCHA token !!")
     if captcha != captcha_text:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid CAPTCHA !!")
+    if (username.strip() == "") or (password.strip() == "") or (email.strip() == "") or (captcha.strip() == "") :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid inputs !!")
+    if (len(password) < 8) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Password must be at least 8 characters !!")
+    if (len(password) >= 30) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Password must be less than 30 characters !!")
+    if (not(validate_username(username)) or not(validate_email(email))) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="email/username must not contain extra characters !!")
     auth_details = schemas.UserCreate(username=username,email=email,password=password)
-    user = await crud.get_user_by_username(db, username)
-    if user is not None:
+    user_by_username = await crud.get_user_by_username(db, username)
+    user_by_email = await crud.get_user_by_email(db, email)
+    if user_by_username is not None or user_by_email is not None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Username already registered !!")
     password_hash = await auth_handler.get_password_hash(password)
     auth_details.password = password_hash
@@ -126,6 +136,16 @@ async def login(captcha_token: str = Body(...),username:str=Body(...), password:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid or expired CAPTCHA token !!")
     if captcha != captcha_text:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid CAPTCHA !!")
+    if (username.strip() == "") or (password.strip() == "") or (captcha.strip() == "") :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid inputs !!")
+    if (len(password) < 8) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Password must be at least 8 characters !!")
+    if (len(password) >= 30) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Password must be less than 30 characters !!")
+    if ("@" in username) and ("." in username) and not(validate_email(username)) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="email must not contain extra characters !!")
+    elif not(validate_username(username)) :
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="username must not contain extra characters !!")
     return await authenticate_user(username,password,db)
 
 @app.delete("/api/delete_user",status_code=status.HTTP_200_OK)

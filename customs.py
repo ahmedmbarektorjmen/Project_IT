@@ -8,6 +8,8 @@ import string
 from datetime import timedelta,datetime
 from captcha.image import ImageCaptcha
 import io
+# user validation:
+import re
 
 async def generate_id(n):
     return str(random.randint(10**n, 10**(n+1)-1))
@@ -30,7 +32,14 @@ async def tuple_to_dict(atuple,type):
     arr["created_at"] = str(arr["created_at"])
     return arr
 
+# user validation:
+def validate_username(username):
+    username_regex = re.compile(r'^[a-zA-Z0-9_.-]{3,30}$')
+    return username_regex.match(username) is not None
 
+def validate_email(email):
+    email_regex = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    return email_regex.match(email) is not None
 # the user authentication :
 class Token(BaseModel):
     access_token: str
