@@ -1,6 +1,6 @@
 # fastapi :
 from fastapi import FastAPI, Depends, status
-from fastapi.params import Form, File, Security,Cookie,Body
+from fastapi.params import Form, File, Security,Body
 from fastapi.datastructures import UploadFile
 from fastapi.requests import Request
 from fastapi.exceptions import HTTPException
@@ -258,4 +258,4 @@ async def home(request: Request, url: str):
 # running the web app:
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run('main:app', host='0.0.0.0', port=80, reload=True)
+    uvicorn.run('main:app', host='0.0.0.0', port=8000)
