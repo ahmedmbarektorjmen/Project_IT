@@ -148,6 +148,13 @@ async def login(captcha_token: str = Body(...),username:str=Body(...), password:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="username must not contain extra characters !!")
     return await authenticate_user(username,password,db)
 
+@app.get("/api/get_user",response_model=schemas.User,status_code=status.HTTP_200_OK)
+async def get_user_by_token(access_token=Security(auth_handler.oauth_scheme),db: Session = Depends(get_db)):
+    user_by_token = await auth_handler.decode_token(access_token)
+    user = await crud.get_user(db,user_by_token["id"])
+    return user
+
+
 @app.delete("/api/delete_user",status_code=status.HTTP_200_OK)
 async def delete_user (db: Session = Depends(get_db),access_token:str= Security(auth_handler.oauth_scheme)):
     user = await auth_handler.decode_token(access_token)
@@ -224,7 +231,7 @@ async def create_product(name: str = Form(...), description: str = Form(...), ca
 async def get_all_products(db: Session = Depends(get_db)):
     return await crud.get_all_products(db)
 # Route to get a product by id
-@app.get("/api/product/{id}", response_class=HTMLResponse)
+@app.get("/product/{id}", response_class=HTMLResponse)
 async def get_product(id: str ,request: Request,db: Session = Depends(get_db)):
     return await crud.get_product(db,id,request,templates)
 
@@ -233,15 +240,6 @@ async def get_product(id: str ,request: Request,db: Session = Depends(get_db)):
 # routing :
 
 # Protected Route :
-@app.get("/dashboard", response_class=HTMLResponse)
-async def home(request: Request,db: Session = Depends(get_db),access_token:str = Cookie(None)):
-    if access_token is None:
-        return templates.TemplateResponse("dashboard_login.html", {"request": request}, status_code=status.HTTP_401_UNAUTHORIZED)
-    decoded_token = await auth_handler.decode_token(access_token)
-    user = await crud.get_user(db, decoded_token["id"])
-    if user["type"] == "user":
-        return templates.TemplateResponse("dashboard_admin.html", {"request": request}, status_code=status.HTTP_401_UNAUTHORIZED)
-    return templates.TemplateResponse("dashboard.html", {"request": request})
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})

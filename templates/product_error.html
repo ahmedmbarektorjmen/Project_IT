@@ -32,12 +32,15 @@
   <script src="/files/js/loading.js"></script>
 
   <header>
-    <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
+    <div class="align_label-span" style="display: flex; gap: 1rem;align-items: center;">
+      <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
     </div>
 
     <div class="align_input-button">
-      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+      <div id="avatar" class="avatar"></div>
+      <a href="/login" id="login_btn"><button class="login"><span>Login</span></button></a>
     </div>
+
   </header>
 
   <div class="root">
@@ -46,5 +49,5 @@
     <h3 align="center">please return to the <a href="/">home page</a></h3>
   </div>
 </body>
-
+<script src="/files/js/remove_login_btn.js"></script>
 </html>

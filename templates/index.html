@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/files/css/loading.min.css">
   <link rel="stylesheet" href="/files/css/main.min.css">
   <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/avatar.css">
   <link rel="stylesheet" href="/files/css/bottom_nav.min.css">
   <link rel="stylesheet" href="/files/css/search_pc.min.css">
   <link rel="stylesheet" href="/files/css/navigation.min.css">
@@ -48,10 +49,15 @@
       <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." />
       <button id="search_icon" class="search_icon fa-solid fa-magnifying-glass"></button>
 
-      <button class="cart"><a href="/cart.html"><i class="fa-solid
-                fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0);"><span id="cart_number"
-              class="cart_number"></span></i></a></button>
-      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+      <button class="cart">
+        <a href="/cart">
+          <i class="fa-solid fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0);">
+            <span id="cart_number" class="cart_number"></span>
+          </i>
+        </a>
+      </button>
+      <div id="avatar" class="avatar"></div>
+      <a href="/login" id="login_btn"><button class="login"><span>Login</span></button></a>
     </div>
 
   </header>
@@ -271,15 +277,15 @@
         <p>its all about your dreams.</p>
 
         <div class="links">
-          <li><a href="/about_us.html">ABOUT US</a></li>
-          <li><a href="/contact_us.html">CONTACT US</a></li>
+          <li><a href="/about_us">ABOUT US</a></li>
+          <li><a href="/contact_us">CONTACT US</a></li>
         </div>
 
         <div class="social">
           <li class="facebook"><a href="https://www.facebook.com/ahmd.torchi/" target="_blank"
               rel="noopener noreferrer"><i class="fa-brands fa-facebook
                       fa-beat"></i></a></li>
-          <li class="instagram"><a href="https://www.instagram.com/ahmd.torchi/" target="_blank"
+          <li class="instagram"><a href="https://www.instagram.com/ahmd__mb/" target="_blank"
               rel="noopener noreferrer"><i class="fa-brands
                       fa-square-instagram fa-beat"></i></a></li>
           <li class="github"><a href="https://github.com/ahmedmbarektorjmen" target="_blank"
@@ -313,18 +319,19 @@
       <button class="fa-solid fa-house fa-xl " style="color: #000;"></button>
     </a>
 
-    <a class="search_btn" href="/search.html">
+    <a class="search_btn" href="/search">
       <button class="fa-solid fa-magnifying-glass fa-xl" style="color: #616161;"></button>
     </a>
-    <a class="cart" href="/cart.html">
+    <a class="cart" href="/cart">
       <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161;">
         <span id="cart_number" class="cart_number"></span>
       </button>
     </a>
 
-    <a class="account" href="/account.html">
+    <a class="avatar account" href="/account" id="account_btn">
       <button class="fa-solid fa-user fa-xl" style="color: #616161;"></button>
     </a>
+    
   </nav>
   <script src="/files/js/navbar.js"></script>
   <script src="/files/js/slider.js"></script>
@@ -332,5 +339,5 @@
   <script src="/files/js/cart_span.js"></script>
 
 </body>
-
+<script src="/files/js/remove_login_btn.js"></script>
 </html>

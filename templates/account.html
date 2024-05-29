@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/files/css/main.min.css" />
   <link rel="stylesheet" href="/files/css/bottom_nav.min.css">
   <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/avatar.css">
   <link rel="stylesheet" href="/files/css/account.min.css" />
   <link rel="stylesheet" href="/files/css/navigation.min.css">
 
@@ -54,52 +55,18 @@
   </div>
   <script src="/files/js/loading.js"></script>
   <header>
-    <input type="checkbox" id="nav_check" hidden />
-    <div class="align_label-span" style="display: flex; gap: 1rem">
-      <label for="nav_check" class="humburger">
-        <i class="fa-solid fa-bars"></i>
-      </label>
-      <span class="logo"><a href="#"><span class="shoppy">Shoppy</span>.tn</a></span>
+    <div class="align_label-span" style="display: flex; gap: 1rem;align-items: center;">
+      <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
     </div>
 
     <div class="align_input-button">
-      <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." /><i
-        class="search_icon fa-solid fa-magnifying-glass"></i>
-      <button class="cart">
-        <a href="/cart.html"><i class="fa-solid fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0)"><span
-              id="cart_number" class="cart_number"></span></i></a>
-      </button>
-      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+      <div id="avatar" class="avatar"></div>
+      <a href="/login" id="login_btn"><button class="login"><span>Login</span></button></a>
     </div>
+
   </header>
 
   <div id="resultsDiv" class="resultsDiv" style="display: none;"></div>
-  <nav class="navigation">
-    <label for="nav_check" class="arrow">
-      <i class="fa-solid fa-arrow-left"></i>
-    </label>
-    <li>
-      <a href="/"><button>Smartphones</button></a>
-    </li>
-    <li>
-      <a href="/"><button>PCs et ordinateur</button></a>
-    </li>
-    <li>
-      <a href="/"><button>Stockage</button></a>
-    </li>
-    <li>
-      <a href="/"><button>TV</button></a>
-    </li>
-    <li>
-      <a href="/"><button>Imprimantes et Photocopies</button></a>
-    </li>
-    <li>
-      <a href="/"><button>Ècouteurs</button></a>
-    </li>
-    <li>
-      <a href="/"><button>Smart Watch</button></a>
-    </li>
-  </nav>
 
   <div class="root">
     <div class="login">
@@ -119,19 +86,20 @@
     <a class="search_btn" href="/search.html">
       <button class="fa-solid fa-magnifying-glass fa-xl" style="color: #616161"></button>
     </a>
-    <a class="cart" href="/cart.html">
-      <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161">
+    <a class="cart" href="/cart">
+      <button class="fa-solid fa-cart-shopping fa-xl" style="color: #616161;">
         <span id="cart_number" class="cart_number"></span>
       </button>
     </a>
 
-    <a class="account" href="/account.html">
-      <button class="fa-solid fa-user fa-xl" style="color: #000"></button>
+    <a class="avatar account" href="/account" id="account_btn">
+      <button class="fa-solid fa-user fa-xl" style="color: #616161;"></button>
     </a>
   </nav>
 
   <script src="/files/js/navbar.js"></script>
+  <script src="/files/js/cart_span.js"></script>
   <script src="/files/js/search_pc.js "></script>
 </body>
-
+<script src="/files/js/remove_login_btn.js"></script>
 </html>

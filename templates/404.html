@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="/files/icons/trolley.png" type="image/x-icon" />
   <link rel="stylesheet" href="/files/css/main.min.css" />
   <link rel="stylesheet" href="/files/css/header.min.css">
+  <link rel="stylesheet" href="/files/css/avatar.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -32,13 +33,26 @@
   <script src="/files/js/loading.js"></script>
 
   <header>
-    <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
+    <div class="align_label-span" style="display: flex; gap: 1rem;align-items: center;">
+      <span class="logo"><a href="/"><span class="shoppy">Shoppy</span>.tn</a></span>
     </div>
 
     <div class="align_input-button">
-      <a href="/login.html"><button class="login"><span>Login</span></button></a>
+      <input type="text" name="search_input" class="search_input" id="search_input" placeholder="search..." />
+      <button id="search_icon" class="search_icon fa-solid fa-magnifying-glass"></button>
+
+      <button class="cart">
+        <a href="/cart">
+          <i class="fa-solid fa-cart-shopping fa-xl" style="color: rgb(0, 0, 0);">
+            <span id="cart_number" class="cart_number"></span>
+          </i>
+        </a>
+      </button>
+      <div id="avatar" class="avatar"></div>
+      <a href="/login" id="login_btn"><button class="login"><span>Login</span></button></a>
     </div>
-  </header>
+
+  </header> 
 
   <div class="root">
     <h1 align="center">ERROR 404 Not found</h1>
@@ -46,5 +60,5 @@
     <h3 align="center">please return to the <a href="/">home page</a></h3>
   </div>
 </body>
-
+<script src="/files/js/remove_login_btn.js"></script>
 </html>

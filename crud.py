@@ -31,7 +31,7 @@ async def create_user(db: Session, user: schemas.UserCreate):
         "user_id": user_id,
         "username": user.username,
         "email": user.email,
-        "profile_pic": "/files/profile_images/default.png",
+        "profile_pic": "/files/profile_images/default.webp",
         "password_hash": user.password
     })
     db.commit()
