@@ -71,7 +71,7 @@ if (window.innerWidth < 800) {
 
     displayAllProducts(); // Call this function when the page is loaded
 
-    searchInput.addEventListener("input", function () {
+    searchInput.addEventListener("input", () => {
         searchProducts();
         if (this.value === "") {
             resetIcon.classList.add("hide");
@@ -80,13 +80,13 @@ if (window.innerWidth < 800) {
         }
     });
 
-    resetIcon.addEventListener("click", function () {
+    resetIcon.addEventListener("click", () => {
         searchInput.value = "";
         resetIcon.classList.add("hide");
         displayAllProducts();
     });
 
-    searchBtn.addEventListener("click", function (e) {
+    searchBtn.addEventListener("click", (e) => {
         e.preventDefault();
         searchProducts();
     });

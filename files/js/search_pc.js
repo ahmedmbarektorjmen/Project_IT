@@ -1,7 +1,7 @@
 // for PC on index.html :
-var resultsDiv = document.querySelector("#resultsDiv");
-var searchBtn = document.getElementById("search_icon");
-var searchInput = document.getElementById("search_input");
+const resultsDiv = document.querySelector("#resultsDiv");
+const searchBtn = document.getElementById("search_icon");
+const searchInput = document.getElementById("search_input");
 
 searchInput.addEventListener("input", function () {
     if (searchInput.value === "") {
@@ -11,65 +11,48 @@ searchInput.addEventListener("input", function () {
     }
 });
 
-function create_html_products(products) {
-    products.map((product) => {
+function create_html_products(products, coin = "DT") {
+    resultsDiv.innerHTML = "";
+    const productElements = products.map((product) => {
         let div_product = document.createElement("div");
         div_product.className = "div_product";
         div_product.innerHTML = `
-        <div>
-          <img src="${product.image}">
-        </div>
-        <a href="/product/${product.id}">
-          <div class="div_content">
-            <div class="div_content_title">
-              ${product.name}
+            <div>
+                <img src="${product.image}">
             </div>
-            <div class="div_content_price">
-              ${product.price}
-            </div>
-          </div>
-        </a>
-        `;
-        resultsDiv.append(div_product);
+            <a href="/product/${product.id}">
+                <div class="div_content">
+                    <div class="div_content_title">
+                        ${product.name}
+                    </div>
+                    <div class="div_content_price">
+                        ${product.price} ${coin}
+                    </div>
+                </div>
+            </a>`;
+        return div_product;
+    });
+    productElements.map((element) => {
+        resultsDiv.append(element);
     });
 }
 
-function searchProducts() {
-    const simplify = (str) => {
-        return str
-            .replace(/\s+/g, " ")
-            .replace("<script></script>", "")
-            .replace("<script>", "")
-            .replace("<script", "")
-            .replace("</script>", "")
-            .replace(/\s+/g, " ")
-            .trim();
-    };
-
-    let searchInput_value = simplify(searchInput.value).toLowerCase();
-
-    fetch("/api/products")
-        .then((result) => result.json())
-        .then((data) => {
-            let foundProducts = data.filter((product) => {
-                return (
-                    product.name.toLowerCase().includes(searchInput_value) ||
-                    product.description
-                        .toLowerCase()
-                        .includes(searchInput_value)
-                );
-            });
-            create_html_products(foundProducts);
-
-            if (foundProducts.length > 0) {
-                resultsDiv.innerHTML = "";
-            } else {
-                resultsDiv.innerHTML = "";
-                resultsDiv.innerHTML = `
-          <h1>Product Not Found !!!</h1>
-          <div>${searchInput_value}</div>`;
-            }
-        });
+async function searchProducts() {
+    const searchInput_value = searchInput.value.trim().toLowerCase();
+    if (searchInput_value == "") {
+        return;
+    }
+    const res = await fetch("/api/search_product?name=" + searchInput_value);
+    if (!res.ok) {
+        const error = await res.json();
+        resultsDiv.innerHTML = `
+            <h1>${error.detail}</h1>
+            <div>${searchInput_value}</div>
+          `;
+        return;
+    }
+    const foundProducts = await res.json();
+    create_html_products(foundProducts);
 }
 
 searchInput.addEventListener("input", () => {
