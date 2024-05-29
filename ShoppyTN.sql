@@ -4,7 +4,7 @@ CREATE TABLE users (
     id varchar(255) NOT NULL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-	profile_pic Varchar(255) NOT NULL,
+	profile_pic Varchar(255) NOT NULL DEFAULT "/files/profile_images/default.png",
     password_hash VARCHAR(255) NOT NULL,
     type VARCHAR(5) NOT NULL DEFAULT 'user',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -17,9 +17,9 @@ CREATE TABLE products (
         image VARCHAR(255) NOT NULL UNIQUE,
         categorie VARCHAR(255) NOT NULL,
         price VARCHAR(20) NOT NULL,
-        stock INTEGER NOT NULL,
-        stars_count INTEGER NOT NULL,
-        stars_sum DECIMAL(10,2) NOT NULL,
+        stock INTEGER NOT NULL DEFAULT 0,
+        stars_count INTEGER NOT NULL DEFAULT 0,
+        stars_sum DECIMAL(10,2) NOT NULL DEFAULT 0.00,
         stars DECIMAL(2,1) NOT NULL DEFAULT 0.00;
         created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 );

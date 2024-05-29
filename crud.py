@@ -22,16 +22,15 @@ async def get_user(db: Session, user_id: str):
     return await tuple_to_dict(result,"user") if result else {"error":"error creating the user"}
 
 async def create_user(db: Session, user: schemas.UserCreate):
-    user_id = await generate_id(14)
+    user_id = await generate_id(20)
     sql = text(f"""
-        INSERT INTO users (id,username, email,profile_pic, password_hash)
-        VALUES (:user_id, :username, :email, :profile_pic, :password_hash);
+        INSERT INTO users (id,username, email, password_hash)
+        VALUES (:user_id, :username, :email, :password_hash);
     """)
     db.execute(sql,{
         "user_id": user_id,
         "username": user.username,
         "email": user.email,
-        "profile_pic": "/files/profile_images/default.webp",
         "password_hash": user.password
     })
     db.commit()
