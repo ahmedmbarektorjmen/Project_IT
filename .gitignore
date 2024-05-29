@@ -1,8 +1,7 @@
 /__pycache__
 .vscode/
 settings.json
-send_to_email.py
 /Lib/
-/sass/
 /scripts/
+/Include/
 pyvenv.cfg

@@ -1,0 +1,126 @@
+@media screen and (min-width: 801px) {
+.navigation_PC {
+    z-index: 1;
+    display: flex;
+    position: sticky;
+    padding: 10px;
+    top: -1;
+    left: 0;
+    right: 0;
+    gap: 1rem;
+    background-color: #dad9d9;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+  
+    li {
+      button {
+        height: 40px;
+        min-width: 100px;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 8px;
+  
+        &:hover {
+          transition: 0.5s ease-in-out;
+          background-color: #efebff;
+          cursor: pointer;
+  
+          a {
+            color: #000;
+          }
+  
+          &:active {
+            transition: 0.5s ease-in-out;
+            background-color: #675cff;
+  
+            a {
+              color: #dad9d9;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+.navigation {
+    overflow-y: scroll;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    padding: 5px 10px;
+    width: 60vw;
+    top: 0;
+    bottom: 0;
+    left: -50rem;
+    gap: 0.5rem;
+    background: hsla(0, 0%, 100%, 0.6);
+    justify-content: flex-start;
+    -webkit-backdrop-filter: blur(0.6rem);
+    backdrop-filter: blur(0.6rem);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+    &::-webkit-scrollbar {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    li {
+      button {
+        height: 40px;
+        width: 100%;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 10px;
+
+        &:hover {
+          transition: 0.5s ease-in;
+          background: hsla(254, 100%, 93%, 0.6);
+          -webkit-backdrop-filter: blur(0.6rem);
+          backdrop-filter: blur(0.6rem);
+          cursor: pointer;
+
+          &:active {
+            transition: all 0.5s ease-in;
+            background-color: #1100ff;
+            -webkit-backdrop-filter: blur(0.6rem);
+            backdrop-filter: blur(0.6rem);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .switch_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36vw;
+      height: 40px;
+      bottom: 1rem;
+      left: 0.5rem;
+      margin-top: auto;
+
+      button {
+        height: 40px;
+        width: 100%;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover {
+          transition: 0.5s ease-in-out;
+          background: hsla(254, 100%, 93%, 0.6);
+          -webkit-backdrop-filter: blur(0.6rem);
+          backdrop-filter: blur(0.6rem);
+        }
+      }
+    }
+  }
+}
