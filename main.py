@@ -232,7 +232,7 @@ async def create_product(name: str = Form(...), description: str = Form(...), ca
 async def search_product(name: str = Query(..., min_length=1), db: Session = Depends(get_db)):
     products = await crud.search_product(db, name)
     if not products:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Product not found !")
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Product not found !!")
     return products
 
 # Route to get all product
@@ -267,4 +267,4 @@ async def home(request: Request, url: str):
 # running the web app:
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run('main:app', host='0.0.0.0', port=8000)
+    uvicorn.run('main:app', host='0.0.0.0', port=8000,reload=True)

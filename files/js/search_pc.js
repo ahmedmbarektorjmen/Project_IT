@@ -11,6 +11,29 @@ searchInput.addEventListener("input", function () {
     }
 });
 
+function create_html_products(products) {
+    products.map((product) => {
+        let div_product = document.createElement("div");
+        div_product.className = "div_product";
+        div_product.innerHTML = `
+        <div>
+          <img src="${product.image}">
+        </div>
+        <a href="/product/${product.id}">
+          <div class="div_content">
+            <div class="div_content_title">
+              ${product.name}
+            </div>
+            <div class="div_content_price">
+              ${product.price}
+            </div>
+          </div>
+        </a>
+        `;
+        resultsDiv.append(div_product);
+    });
+}
+
 function searchProducts() {
     const simplify = (str) => {
         return str
@@ -36,29 +59,10 @@ function searchProducts() {
                         .includes(searchInput_value)
                 );
             });
+            create_html_products(foundProducts);
 
             if (foundProducts.length > 0) {
                 resultsDiv.innerHTML = "";
-
-                foundProducts.map((product) => {
-                    let div_product = document.createElement("div");
-                    div_product.className = "div_product";
-                    div_product.innerHTML = `
-            <div>
-              <img src="${product.image}">
-            </div>
-            <a href="/product/${product.id}">
-              <div class="div_content">
-                <div class="div_content_title">
-                  ${product.name}
-                </div>
-                <div class="div_content_price">
-                  ${product.price}
-                </div>
-              </div>
-            </a>`;
-                    resultsDiv.append(div_product);
-                });
             } else {
                 resultsDiv.innerHTML = "";
                 resultsDiv.innerHTML = `
@@ -73,6 +77,6 @@ searchInput.addEventListener("input", () => {
 });
 
 searchBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  searchProducts(); // Call this function when the user clicks the search button
+    e.preventDefault();
+    searchProducts(); // Call this function when the user clicks the search button
 });

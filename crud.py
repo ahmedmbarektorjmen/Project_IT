@@ -1,8 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 import models, schemas
-import datetime
-import bcrypt
 from customs import tuple_to_dict, generate_id
 
 
@@ -81,10 +79,10 @@ async def get_all_products(db:Session):
 async def search_product(db:Session,name:str):
     search_value = name.lower()
     sql = text("""
-        SELECT (id, name, description, image, categorie, price, stock, stars_count, stars_sum, stars, created_at) FROM products
-        WHERE LOWER(name) LIKE :search_input_value OR LOWER(description) LIKE :search_input_value;
+        SELECT * FROM products
+        WHERE LOWER(name) LIKE :search_value OR LOWER(description) LIKE :search_value;
     """)
-    result = db.execute(sql, {"search_input_value": f"%{search_value}%"}).fetchall()
+    result = db.execute(sql, {"search_value": f"%{search_value}%"}).fetchall()
     if not result:
         return None
     arr = [await tuple_to_dict(col,"product") for col in result]
