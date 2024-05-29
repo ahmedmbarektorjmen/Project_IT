@@ -1,6 +1,6 @@
 # fastapi :
 from fastapi import FastAPI, Depends, status
-from fastapi.params import Form, File, Security,Body
+from fastapi.params import Form, File, Security,Body,Query
 from fastapi.datastructures import UploadFile
 from fastapi.requests import Request
 from fastapi.exceptions import HTTPException
@@ -226,11 +226,21 @@ async def create_product(name: str = Form(...), description: str = Form(...), ca
         shutil.copyfileobj(image.file, buffer)
     await crud.create_product(db, product)
     return {"msg":"Product created successfully"}
+
+# search product :
+@app.get("/api/search_product", response_model=List[schemas.Product])
+async def search_product(name: str = Query(..., min_length=1), db: Session = Depends(get_db)):
+    products = await crud.search_product(db, name)
+    if not products:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Product not found !")
+    return products
+
 # Route to get all product
 @app.get("/api/products", response_model=List[schemas.Product])
 async def get_all_products(db: Session = Depends(get_db)):
     return await crud.get_all_products(db)
-# Route to get a product by id
+
+# USER UI Route to get a product by id
 @app.get("/product/{id}", response_class=HTMLResponse)
 async def get_product(id: str ,request: Request,db: Session = Depends(get_db)):
     return await crud.get_product(db,id,request,templates)

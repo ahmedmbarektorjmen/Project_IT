@@ -8,6 +8,6 @@ PASS = ""
 HOST = "127.0.0.1"
 DB_Name = "ShoppyTN"
 
-engine = create_engine(f"mysql+pymysql://{USER}:{PASS}@{HOST}/{DB_Name}",echo=True)
+engine = create_engine(f"mysql+pymysql://{USER}:{PASS}@{HOST}/{DB_Name}")
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

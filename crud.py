@@ -78,6 +78,18 @@ async def get_all_products(db:Session):
     arr = [await tuple_to_dict(col,"product") for col in result]
     return arr
 
+async def search_prodcuct(db:Session,name:str):
+    search_value = name.lower()
+    sql = text("""
+        SELECT (id, name, description, image, categorie, price, stock, stars_count, stars_sum, stars, created_at) FROM products
+        WHERE LOWER(name) LIKE :search_input_value OR LOWER(description) LIKE :search_input_value;
+    """)
+    result = db.execute(sql, {"search_input_value": f"%{search_value}%"}).fetchall()
+    if not result:
+        return None
+    arr = [await tuple_to_dict(col,"product") for col in result]
+    return arr
+
 async def get_product(db:Session,product_id:str,request,templates):
     sql = text(f"SELECT * FROM products where id = '{product_id}';")
     result = db.execute(sql).fetchone()
