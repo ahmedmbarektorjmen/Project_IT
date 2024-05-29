@@ -3,5 +3,5 @@
 settings.json
 /Lib/
 /scripts/
-/Include/
+Include/
 pyvenv.cfg
