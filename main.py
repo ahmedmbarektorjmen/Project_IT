@@ -237,9 +237,8 @@ async def get_product(id: str ,request: Request,db: Session = Depends(get_db)):
 
 
 
-# routing :
 
-# Protected Route :
+# routing :
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
